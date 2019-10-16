@@ -9,8 +9,8 @@
 
 template <typename T> class Pipe{
 private:
-    Port<T> previousOut;
-    Port<T> nextIn;
+    Port<T> * previousOut;
+    Port<T> * nextIn;
 public:
     Pipe(Port<T> * previousOut, Port<T> * nextIn ){
         this->nextIn = nextIn;
