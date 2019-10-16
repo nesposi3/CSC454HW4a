@@ -23,6 +23,7 @@ public:
     Port<Output> getOutputPort(){
         return this->outputPort;
     }
+    Model(){}
 };
 
 #endif //CSC454HW4A_MODEL_H

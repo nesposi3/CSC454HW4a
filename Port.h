@@ -20,9 +20,10 @@ public:
         return this->t;
     }
 
-    Port(T t) {
+    Port<T>(T t) {
         this->t = t;
     }
+    Port(){}
 };
 
 #endif //CSC4543A_PORT_H

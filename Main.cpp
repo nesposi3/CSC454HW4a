@@ -10,5 +10,7 @@ using namespace std;
 int main(){
     Port<string> *p = new Port<string>("0");
     cout<<p->getVal();
+    Network<string,string> * x = new Network<string,string>(1, true);
     delete p;
+    delete(x);
 }

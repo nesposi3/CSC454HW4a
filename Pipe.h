@@ -12,10 +12,11 @@ private:
     Port<T> * previousOut;
     Port<T> * nextIn;
 public:
-    Pipe(Port<T> * previousOut, Port<T> * nextIn ){
+    Pipe<T>(Port<T> * previousOut, Port<T> * nextIn ){
         this->nextIn = nextIn;
         this->previousOut = previousOut;
     }
+    Pipe(){}
 };
 
 #endif //CSC4543A_PIPE_H
