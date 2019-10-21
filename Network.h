@@ -1,5 +1,5 @@
 //
-// Created by nick on 10/16/19.
+// Created by nick on 10/16/19->
 //
 
 #ifndef CSC4543A_NETWORK_H
@@ -17,11 +17,27 @@ public:
         this->numTicks = numTicks;
         this->debug = debugFlag;
     }
-    void delta(std::vector<Input> input){
+    void delta(std::vector<Input> input) {
+        this->firstChild->delta(input);
+        for (Model<Input,Output>* m:this->childList) {
+            std::vector<Port<Input>*> inputPorts = m->getInputPorts();
+            std::vector<Input> deltaInputs = std::vector<Input>();
+            for (auto* p:inputPorts) {
+                deltaInputs.push_back(p->getVal());
+            }
+            m->delta(deltaInputs);
+        }
+
+        std::vector<Port<Input>*> inputPorts = finalChild->getInputPorts();
+        std::vector<Input> deltaInputs =  std::vector<Input>();
+        for (Port<Input> *p:inputPorts) {
+            deltaInputs.push_back(p->getVal());
+        }
+        finalChild->delta(deltaInputs);
 
     }
-    void addModel(Model<Input,Output> m){
-        this->childList.push_back(m);
+    void addModel(Model<Input,Output>* m){
+        this->childList->push_back(m);
     }
     Output tick(std::vector<Input> input){
         Output finalOutput = NULL;
@@ -35,28 +51,32 @@ public:
         return finalOutput;
     }
     Output lambda() {
-        Output firstOutput = this->firstChild.lambda();
+        Output firstOutput = this->firstChild->lambda();
         this->firstChild->getOutputPort()->setVal(firstOutput);
-        for (auto this->firstChild->getPipes() :this.firstChild.getPipes()
-                ) {
-            p.shiftVal(firstOutput);
+        for (Pipe<Output> *p:this->firstChild->getPipes()) {
+            p->shiftVal(firstOutput);
         }
 
 
-        for (Model<Input,Output> m: this.childList
+        for (Model<Input,Output> *m: this->childList
                 ) {
-            Output output = m.lambda();
-            m.getOutputPort().setVal(output);
-            for(Pipe<Output> p: m.getPipes()){
-                p.shiftVal(output);
+            Output output = m->lambda();
+            m->getOutputPort()->setVal(output);
+            for(Pipe<Output> *p: m->getPipes()){
+                p->shiftVal(output);
             }
         }
-        Output finalOutput = this.finalChild.lambda();
-        for (Pipe<Output> p :this.finalChild.getPipes()) {
-            p.shiftVal(finalOutput);
-
+        Output finalOutput = this->finalChild->lambda();
+        for (Pipe<Output>* p :this->finalChild->getPipes()) {
+            p->shiftVal(finalOutput);
         }
         return finalOutput;
+    }
+    void setFirstChild(Model<Input,Output>* m){
+        this->firstChild = m;
+    }
+    void setFinalChild(Model<Input,Output>* m){
+        this->finalChild = m;
     }
 
 };

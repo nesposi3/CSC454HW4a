@@ -13,15 +13,21 @@
 template <typename Input,typename Output> class Model{
     protected:
         bool debug;
-        std::vector<Port<Input>> inputPorts;
-        Port<Output> outputPort;
-        std::vector<Pipe<Output>> pipeList;
-        std::vector<Model<Input,Output>> childList;
+        std::vector<Port<Input> *> inputPorts;
+        Port<Output>* outputPort;
+        std::vector<Pipe<Output> *> pipeList;
+        std::vector<Model<Input,Output> *> childList;
 public:
     virtual Output lambda() = 0;
     virtual void delta(std::vector<Input>) = 0;
-    Port<Output> getOutputPort(){
+    Port<Output>* getOutputPort(){
         return this->outputPort;
+    }
+    std::vector<Port<Input>*> getInputPorts(){
+        return this->inputPorts;
+    }
+    std::vector<Pipe<Output>*> getPipes(){
+        return this->pipeList;
     }
     Model(){}
 };

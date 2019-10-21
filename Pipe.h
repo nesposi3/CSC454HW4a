@@ -16,6 +16,10 @@ public:
         this->nextIn = nextIn;
         this->previousOut = previousOut;
     }
+    void shiftVal(T newOut){
+        previousOut->setVal(newOut);
+        nextIn->setVal(previousOut->getVal());
+    }
     Pipe(){}
 };
 
