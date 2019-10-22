@@ -11,7 +11,8 @@ class XORModel:Model<std::string,std::string> {
 public:
     std::string lambda() override;
     void delta(std::vector<std::string>) override;
-    XORModel();
+    XORModel(std::string name);
+    ~XORModel();
 
 private:
     int bit;

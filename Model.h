@@ -9,7 +9,7 @@
 #include "Pipe.h"
 #include "Port.h"
 #include <vector>
-
+#include <iostream>
 template <typename Input,typename Output> class Model{
     protected:
         bool debug;
@@ -18,6 +18,7 @@ template <typename Input,typename Output> class Model{
         std::vector<Pipe<Output> *> pipeList;
         std::vector<Model<Input,Output> *> childList;
 public:
+    std::string name;
     virtual Output lambda() = 0;
     virtual void delta(std::vector<Input>) = 0;
     Port<Output>* getOutputPort(){
