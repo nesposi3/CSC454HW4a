@@ -30,7 +30,23 @@ public:
     std::vector<Pipe<Output>*> getPipes(){
         return this->pipeList;
     }
+    void addPort(Port<Input>* p ){
+        this->inputPorts.push_back(p);
+    }
+
+    ~Model(){
+        delete(this->outputPort);
+        for(auto p: this->pipeList){
+            delete(p);
+        }
+        this->pipeList.clear();
+    }
     Model(){}
+
+    void addPipe(Port<Output> *nextIn ){
+        Pipe<Output>* p = new Pipe<Output>(this->outputPort,nextIn);
+        this->pipeList.push_back(p);
+    }
 };
 
 #endif //CSC454HW4A_MODEL_H

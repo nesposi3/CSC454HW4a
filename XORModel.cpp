@@ -21,7 +21,7 @@ void XORModel::delta(std::vector<std::string> input) {
     }
 }
 
-XORModel::XORModel(std::string name) {
+XORModel::XORModel(bool debug,std::string name) {
     this->bit = 0;
     this->name = name;
     this->pipeList = std::vector<Pipe<std::string>*>();
@@ -29,7 +29,3 @@ XORModel::XORModel(std::string name) {
     this->outputPort = new Port<std::string>();
 }
 
-XORModel::~XORModel() {
-    delete this->outputPort;
-
-}

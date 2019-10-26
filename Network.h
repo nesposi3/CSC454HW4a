@@ -37,10 +37,10 @@ public:
 
     }
     void addModel(Model<Input,Output>* m){
-        this->childList->push_back(m);
+        this->childList.push_back(m);
     }
     Output tick(std::vector<Input> input){
-        Output finalOutput = NULL;
+        Output finalOutput;
         for (int i = 0; i <numTicks ; i++) {
             finalOutput = lambda();
             delta(input);

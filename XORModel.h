@@ -7,12 +7,11 @@
 
 #include "Model.h"
 #include <iostream>
-class XORModel:Model<std::string,std::string> {
+class XORModel: public Model<std::string,std::string> {
 public:
     std::string lambda() override;
     void delta(std::vector<std::string>) override;
-    XORModel(std::string name);
-    ~XORModel();
+    XORModel(bool debug,std::string name);
 
 private:
     int bit;

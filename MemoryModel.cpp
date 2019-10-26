@@ -17,15 +17,12 @@ void MemoryModel::delta(std::vector<std::string> input) {
     }
 }
 
-MemoryModel::MemoryModel(std::string name) {
+MemoryModel::MemoryModel(bool debug,std::string name) {
     this->name = name;
     this->b1 =0;
     this->b2 =0;
+    this->debug = debug;
     this->pipeList = std::vector<Pipe<std::string>*>();
     this->inputPorts = std::vector<Port<std::string>*>();
     this->outputPort = new Port<std::string>();
-}
-
-MemoryModel::~MemoryModel() {
-    delete this->outputPort;
 }

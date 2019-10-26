@@ -8,12 +8,11 @@
 
 #include "Model.h"
 #include <iostream>
-class MemoryModel: Model<std::string,std::string> {
+class MemoryModel: public Model<std::string,std::string> {
 public:
     std::string lambda() override ;
     void delta(std::vector<std::string> input) override ;
-    MemoryModel(std::string name);
-    ~MemoryModel();
+    MemoryModel(bool debug,std::string name);
 private:
     int b1;
     int b2;
